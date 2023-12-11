@@ -1,70 +1,36 @@
-# Square-and-Multiply Algorithm Readme
+# Read Me - Square and Multiply Algorithm
 
 ## Overview
+This Java program demonstrates the Square and Multiply algorithm, a method for efficiently computing modular exponentiation. The algorithm is particularly useful in cryptography, where large numbers need to be raised to a power modulo another number.
 
-This Java program demonstrates the implementation of the Square-and-Multiply algorithm to efficiently calculate exponentiation modulo a given modulus. The program takes a base, an exponent, and a modulus as inputs and generates a binary representation of the exponent using the "Q" and "QM" encoding. The Square-and-Multiply algorithm is then applied both iteratively and recursively to compute the result.
+## Usage
+To use this program, follow these steps:
 
-## Program Execution
+1. Open the `Main` class.
+2. Set the values for `base`, `exponent`, and `modulus` in the `main` method.
+3. Run the program.
 
-### Input
+The program will calculate the result of `base^exponent mod modulus` using the Square and Multiply algorithm and display the intermediate steps, including the binary representation of the exponent and the number of multiplications performed.
 
-- `base`: The base value for exponentiation.
-- `exponent`: The exponent to which the base is raised.
-- `modulus`: The modulus used for modulo operation.
+## Methods
 
-### Output
+### `toBinary(int exponent)`
+Converts an integer exponent to its binary representation.
 
-The program outputs the following information:
-- `Potency Value`: The result of exponentiation modulo the given modulus.
-- `Binary String`: The binary representation of the exponent using "Q" and "QM".
+### `squareAndMultiply(int base, String binaryExponent, int modulus)`
+Implements the Square and Multiply algorithm iteratively. Calculates `base^exponent mod modulus` efficiently.
 
-## Binary String Encoding
+### `squareAndMultiplyRecursive(int base, String binaryExponent, int modulus)`
+Implements the Square and Multiply algorithm recursively. Calculates `base^exponent mod modulus` efficiently using recursion.
 
-The binary representation of the exponent is created using a custom encoding scheme where:
-- 'Q' represents a binary digit '0'.
-- 'QM' represents a binary digit '1'.
+### `print(String binaryExponent, int result)`
+Prints the final result of the modular exponentiation, along with the binary representation of the exponent.
 
-For example:
-- The exponent `5` is represented as `QM` in binary.
-- The exponent `15` is represented as `QMQM` in binary.
+## Example
+In the provided example in the `main` method, the program calculates `2^18 mod 39` using the Square and Multiply algorithm.
 
-## Program Components
+## Note
+- Ensure that the input values for `base`, `exponent`, and `modulus` are appropriate for your use case.
+- The `squareAndMultiplyRecursive` method provides an alternative recursive implementation of the algorithm.
 
-### `toBinary` Method
-
-This method converts the decimal exponent into its binary representation using the custom encoding scheme. It iteratively divides the exponent by 2, appending 'Q' or 'QM' based on the remainder.
-
-### `squareAndMultiply` Method
-
-This method implements the Square-and-Multiply algorithm iteratively. It reads the binary exponent representation and performs square and multiply operations accordingly.
-
-### `squareAndMultiplyRecursive` Method
-
-This method implements the Square-and-Multiply algorithm recursively. It follows the same logic as the iterative version but utilizes recursion.
-
-### `print` Method
-
-This method prints the results, including the potency value and the binary string representation of the exponent.
-
-## Example Usage
-
-```java
-public class Main {
-    public static void main(String[] args) {
-        int base = 3;
-        int exponent = 15;
-        int modulus = 10;
-
-        String binaryExponent = toBinary(exponent);
-        int potencyValue = squareAndMultiplyRecursive(base, binaryExponent, modulus);
-
-        print(binaryExponent, potencyValue);
-    }
-
-    // ... (Rest of the program remains unchanged)
-}
-```
-
-This example calculates \(3^{15} \mod 10\) using the Square-and-Multiply algorithm and prints the results.
-
-Feel free to modify the `base`, `exponent`, and `modulus` values in the `main` method for testing with different inputs.
+Feel free to modify the program for your specific requirements or integrate it into your projects.

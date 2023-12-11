@@ -1,22 +1,20 @@
 public class Main {
     public static void main(String[] args) {
-        int base = 3;
-        int exponent = 15;
-        int modulus = 10;
+        int base = 2;
+        int exponent = 18;
+        int modulus = 39;
 
         String binaryExponent = toBinary(exponent);
-        int potencyValue = squareAndMultiplyRecursive(base, binaryExponent, modulus);
+        int result = squareAndMultiply(base, binaryExponent, modulus);
 
-        print(binaryExponent, potencyValue);
+        print(binaryExponent, result);
     }
 
     public static String toBinary(int exponent) {
         StringBuilder binaryNumber = new StringBuilder();
 
         while (exponent > 0) {
-            if (exponent % 2 == 0) binaryNumber.insert(0, "Q");
-            else binaryNumber.insert(0, "QM");
-
+            binaryNumber.insert(0, exponent % 2);
             exponent /= 2;
         }
 
@@ -27,8 +25,8 @@ public class Main {
         int result = base;
         int countMultiplications = 0;
 
-        for (int i = 2; i < binaryExponent.length(); i++) {
-            if (binaryExponent.charAt(i) == 'Q') result = (result * result) % modulus;
+        for (int i = 0; i < binaryExponent.length(); i++) {
+            if (binaryExponent.charAt(i) == '0') result = (result * result) % modulus;
             else result = (result * base) % modulus;
             countMultiplications++;
         }
@@ -42,14 +40,14 @@ public class Main {
         char lastDigit = binaryExponent.charAt(binaryExponent.length() - 1);
         int result = squareAndMultiplyRecursive(base, binaryExponent.substring(0, binaryExponent.length() - 1), modulus);
 
-        if (lastDigit == 'Q') result = (result * result) % modulus;
+        if (lastDigit == '0') result = (result * result) % modulus;
         else result = (result * base) % modulus;
 
         return result;
     }
 
-    public static void print(String binaryExponent, int potencyValue) {
-        System.out.println("Potency Value: " + potencyValue);
+    public static void print(String binaryExponent, int result) {
+        System.out.println("Result: " + result);
         System.out.println("Binary String: " + binaryExponent);
     }
 }
