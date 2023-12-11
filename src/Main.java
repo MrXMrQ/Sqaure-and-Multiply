@@ -1,11 +1,11 @@
 public class Main {
     public static void main(String[] args) {
-        int base = 2;
-        int exponent = 18;
-        int modulus = 39;
+        int base = 46;
+        int exponent = 78;
+        int modulus = 1277;
 
         String binaryExponent = toBinary(exponent);
-        int result = squareAndMultiply(base, binaryExponent, modulus);
+        int result = squareAndMultiplyRecursive(base, binaryExponent, modulus);
 
         print(binaryExponent, result);
     }
@@ -25,9 +25,9 @@ public class Main {
         int result = base;
         int countMultiplications = 0;
 
-        for (int i = 0; i < binaryExponent.length(); i++) {
-            if (binaryExponent.charAt(i) == '0') result = (result * result) % modulus;
-            else result = (result * base) % modulus;
+        for (int i = 1; i < binaryExponent.length(); i++) {
+            result = (result * result) % modulus;
+            if (binaryExponent.charAt(i) == '1') result = (result * base) % modulus;
             countMultiplications++;
         }
         System.out.println("Multiplications: " + countMultiplications);
@@ -40,8 +40,8 @@ public class Main {
         char lastDigit = binaryExponent.charAt(binaryExponent.length() - 1);
         int result = squareAndMultiplyRecursive(base, binaryExponent.substring(0, binaryExponent.length() - 1), modulus);
 
-        if (lastDigit == '0') result = (result * result) % modulus;
-        else result = (result * base) % modulus;
+        result = (result * result) % modulus;
+        if (lastDigit == '1') result = (result * base) % modulus;
 
         return result;
     }
